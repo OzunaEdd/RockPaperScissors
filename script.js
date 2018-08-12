@@ -1,61 +1,84 @@
+const button = document.querySelectorAll('button');
+const player = document.querySelector('#player');
+const comp = document.querySelector('#computer');
+const winner = document.querySelector('#winner');
+const playerPick = document.querySelector('#player-pick');
+const computerPick = document.querySelector('#computer-pick');
+const nextRound = document.querySelector('#round');
 let compScore = 0;
 let playScore = 0;
-let round = 1;
-game();
+let playerSelection;
+let picked;
+let round = 0;
+let winRound = 1;
 
-function game() {
-  function computerPlay() {
-    let choices = ['ROCK', 'PAPER', 'SCISSORS'];
-    let randomChoice = Math.floor(Math.random() * choices.length);
-    let picked = choices[randomChoice];
-    console.log(picked);
-    return picked;
-  }
-
-  function startGame(playerSelection, computerSelection) {
-
-    do {
-      if ((playerSelection === 'ROCK') && (computerSelection === 'PAPER')) {
-        compScore++;
-        return "You Lose!";
-      } else if ((playerSelection === 'PAPER') && (computerSelection === 'ROCK')) {
-        playScore++;
-        return "You Won";
-      } else if ((playerSelection === 'PAPER') && (computerSelection === 'SCISSORS')) {
-        compScore++;
-        return "You Lose!";
-      } else if ((playerSelection === 'SCISSORS') && (computerSelection === 'PAPER')) {
-        playScore++;
-        return "You Won!";
-      } else if ((playerSelection === 'SCISSORS') && (computerSelection === 'ROCK')) {
-        compScore++;
-        return "You Lose!";
-      } else if ((playerSelection === 'ROCK') && (computerSelection === 'SCISSORS')) {
-        playScore++;
-        return "You Won!";
-      } else if (playerSelection === computerSelection) {
-        return "Same Choice! Pick Another One";
-      }
-    } while (playerSelection != computerSelection);
-  }
-
-  function checkWinner() {
-    if (playScore > compScore) {
-      return "Player Win!"
-    } else if (playScore == compScore) {
-      return "Draw!"
-    } else if (compScore > playScore) {
-      return "Computer Win!"
-    }
-  }
-
-  while (round <= 5) {
-    const playerSelection = prompt('Choice Either Rock ,Paper, or Scissors:').toUpperCase();
-    const computerSelection = computerPlay();
-    console.log(startGame(playerSelection, computerSelection));
-    console.log('Player-Score: ' + playScore);
-    console.log('Computer-Score: ' + compScore);
-    round++;
-  }
-  console.log(checkWinner());
+function computerPlay() {
+  let choices = ['ROCK', 'PAPER', 'SCISSORS'];
+  let randomChoice = Math.floor(Math.random() * choices.length);
+  picked = choices[randomChoice];
+  console.log(picked);
+  return picked;
 }
+
+function startGame(playerSelection, computerSelection) {
+
+  if ((playerSelection === 'ROCK') && (computerSelection === 'PAPER')) {
+    compScore++;
+    winRound = 'You Lose';
+    round++;
+    return 0;
+  } else if ((playerSelection === 'PAPER') && (computerSelection === 'ROCK')) {
+    playScore++;
+    winRound = "You Won";
+    round++;
+    return 0;
+  } else if ((playerSelection === 'PAPER') && (computerSelection === 'SCISSORS')) {
+    compScore++;
+    winRound = "You Lose!";
+    round++;
+    return 0;
+  } else if ((playerSelection === 'SCISSORS') && (computerSelection === 'PAPER')) {
+    playScore++;
+    winRound = "You Won!";
+    round++;
+    return 0;
+  } else if ((playerSelection === 'SCISSORS') && (computerSelection === 'ROCK')) {
+    compScore++;
+    winRound = "You Lose!";
+    round++;
+  } else if ((playerSelection === 'ROCK') && (computerSelection === 'SCISSORS')) {
+    playScore++;
+    winRound = "You Won!";
+    round++;
+    return 0;
+  } else if (playerSelection === computerSelection) {
+    winRound = 'Draw! Choose Again'
+    round++;
+    return "Same Choice! Pick Another One";
+  }
+
+}
+
+
+
+button.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    playerSelection = e.target.innerHTML;
+    if (round != 5) {
+      startGame(playerSelection, computerPlay());
+      player.innerHTML = 'Player-Score: ' + playScore;
+      comp.innerHTML = 'Computer-Score: ' + compScore;
+      playerPick.innerHTML = 'Player-Choose: ' + e.target.innerHTML;
+      computerPick.innerHTML = 'Computer-Choose: ' + picked;
+      nextRound.innerHTML = 'Round-' + round + ': ' + winRound;
+      if (round == 5) {
+        if (compScore > playScore)
+          winner.innerHTML = 'Winner: Computer'
+        else if (playScore > compScore)
+          winner.innerHTML = 'Winner: Player'
+        else if (playScore == compScore)
+          winner.innerHTML = 'Winner: Draw'
+      }
+    }
+  })
+})

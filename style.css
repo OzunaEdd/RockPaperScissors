@@ -1,0 +1,54 @@
+body{
+  background-color: black;
+  color: white;
+}
+
+h1, h2 {
+  text-align: center;
+}
+button{
+ position: relative;
+ margin: 10px;
+ left: 32%;
+ font-weight: bold;
+}
+#board {
+  position: absolute;
+  min-height: 250px;
+  left: 24.5%;
+  width: 700px;
+  background-color: white;
+  color: black;
+}
+#player{
+  position: relative;
+}
+#computer{
+  position: relative;
+  text-align: right;
+  bottom: 38px;
+}
+#winner {
+  position: relative;
+  left: 264px;
+}
+#btn-container {
+  min-height: 250px;
+  width: 700px;
+  left: 24.5%;
+  position: relative;
+  top: 300px;
+}
+#player-pick {
+  position: relative;
+
+}
+#computer-pick{
+  position: relative;
+  text-align: right;
+  right: 5%;
+  bottom: 38px;
+}
+#round {
+  text-align: center;
+}
