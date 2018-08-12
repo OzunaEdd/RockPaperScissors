@@ -1,4 +1,4 @@
-const button = document.querySelectorAll('button');
+const button = document.querySelectorAll('.btn');
 const player = document.querySelector('#player');
 const comp = document.querySelector('#computer');
 const winner = document.querySelector('#winner');
@@ -24,12 +24,12 @@ function startGame(playerSelection, computerSelection) {
 
   if ((playerSelection === 'ROCK') && (computerSelection === 'PAPER')) {
     compScore++;
-    winRound = 'You Lose';
+    winRound = 'You Lose!';
     round++;
     return 0;
   } else if ((playerSelection === 'PAPER') && (computerSelection === 'ROCK')) {
     playScore++;
-    winRound = "You Won";
+    winRound = "You Won!";
     round++;
     return 0;
   } else if ((playerSelection === 'PAPER') && (computerSelection === 'SCISSORS')) {

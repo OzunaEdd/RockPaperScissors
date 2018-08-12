@@ -52,3 +52,6 @@ button{
 #round {
   text-align: center;
 }
+#replay-btn {
+  position: relative;
+}
